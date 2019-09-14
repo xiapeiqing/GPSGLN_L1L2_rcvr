@@ -1,0 +1,11 @@
+[Inputs]
+CA_CLOCK
+CA_EPOCH
+CLOCK
+DAV
+INTEG
+=DIN[9:0]=
+[Outputs]
+INT
+INTENDS
+[BiDir]

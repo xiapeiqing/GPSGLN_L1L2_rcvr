@@ -1,0 +1,668 @@
+--------------------------------------------------------------------------------
+-- Copyright (c) 1995-2003 Xilinx, Inc.
+-- All Right Reserved.
+--------------------------------------------------------------------------------
+--   ____  ____ 
+--  /   /\/   / 
+-- /___/  \  /    Vendor: Xilinx 
+-- \   \   \/     Version : 9.1i
+--  \   \         Application : ISE
+--  /   /         Filename : intimer_tbw.ant
+-- /___/   /\     Timestamp : Wed Apr 11 19:37:22 2007
+-- \   \  /  \ 
+--  \___\/\___\ 
+--
+--Command: 
+--Design Name: intimer_tbw
+--Device: Xilinx
+--
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_unsigned.all;
+USE IEEE.STD_LOGIC_TEXTIO.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE STD.TEXTIO.ALL;
+
+ENTITY intimer_tbw IS
+END intimer_tbw;
+
+ARCHITECTURE testbench_arch OF intimer_tbw IS
+    FILE RESULTS: TEXT OPEN WRITE_MODE IS "C:\peiqing\XilinxProjectPQ\GG\intimer_tbw.ano";
+
+    COMPONENT intimer
+        PORT (
+            CA_CLOCK : In std_logic;
+            CA_EPOCH : In std_logic;
+            CLOCK : In std_logic;
+            DAV : In std_logic;
+            DIN : In std_logic_vector (9 DownTo 0);
+            INTEG : In std_logic;
+            INT : Out std_logic;
+            INTENDS : Out std_logic
+        );
+    END COMPONENT;
+
+    SIGNAL CA_CLOCK : std_logic := '0';
+    SIGNAL CA_EPOCH : std_logic := '0';
+    SIGNAL CLOCK : std_logic := '0';
+    SIGNAL DAV : std_logic := '0';
+    SIGNAL DIN : std_logic_vector (9 DownTo 0) := "0000000010";
+    SIGNAL INTEG : std_logic := '0';
+    SIGNAL INT : std_logic := '0';
+    SIGNAL INTENDS : std_logic := '0';
+
+    SHARED VARIABLE TX_ERROR : INTEGER := 0;
+    SHARED VARIABLE TX_OUT : LINE;
+
+    constant PERIOD : time := 40 ns;
+    constant DUTY_CYCLE : real := 0.5;
+    constant OFFSET : time := 0 ns;
+
+    BEGIN
+        UUT : intimer
+        PORT MAP (
+            CA_CLOCK => CA_CLOCK,
+            CA_EPOCH => CA_EPOCH,
+            CLOCK => CLOCK,
+            DAV => DAV,
+            DIN => DIN,
+            INTEG => INTEG,
+            INT => INT,
+            INTENDS => INTENDS
+        );
+
+        PROCESS    -- clock process for CLOCK
+        BEGIN
+            WAIT for OFFSET;
+            CLOCK_LOOP : LOOP
+                CLOCK <= '0';
+                WAIT FOR (PERIOD - (PERIOD * DUTY_CYCLE));
+                CLOCK <= '1';
+                WAIT FOR (PERIOD * DUTY_CYCLE);
+            END LOOP CLOCK_LOOP;
+        END PROCESS;
+
+        PROCESS    -- Annotation process for CLOCK
+            VARIABLE TX_TIME : INTEGER := 0;
+
+            PROCEDURE ANNOTATE_INT(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", INT, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, INT);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+            PROCEDURE ANNOTATE_INTENDS(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", INTENDS, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, INTENDS);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+        BEGIN
+            WAIT for 1 fs;
+            ANNOTATE_INT(0);
+            ANNOTATE_INTENDS(0);
+            WAIT for OFFSET;
+            TX_TIME := TX_TIME + 0;
+            ANNO_LOOP : LOOP
+                --Rising Edge
+                WAIT for 25 ns;
+                TX_TIME := TX_TIME + 25;
+                ANNOTATE_INT(TX_TIME);
+                ANNOTATE_INTENDS(TX_TIME);
+                WAIT for 15 ns;
+                TX_TIME := TX_TIME + 15;
+            END LOOP ANNO_LOOP;
+        END PROCESS;
+
+        PROCESS
+            BEGIN
+                -- -------------  Current Time:  55ns
+                WAIT FOR 55 ns;
+                DAV <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  95ns
+                WAIT FOR 40 ns;
+                DAV <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  175ns
+                WAIT FOR 80 ns;
+                INTEG <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  295ns
+                WAIT FOR 120 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  335ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  615ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  655ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  935ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  975ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  1255ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  1295ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  1575ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  1615ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  1895ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  1935ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  2215ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  2255ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  2535ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  2575ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  2855ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  2895ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  3175ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  3215ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  3495ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  3535ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  3815ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  3855ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  4135ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  4175ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  4455ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  4495ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  4775ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  4815ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  5095ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  5135ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  5415ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  5455ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  5735ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  5775ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  6055ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  6095ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  6375ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  6415ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  6695ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  6735ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  7015ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  7055ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  7335ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  7375ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  7655ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  7695ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  7975ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  8015ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  8295ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  8335ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  8615ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  8655ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  8935ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  8975ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  9255ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  9295ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  9575ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  9615ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  9895ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  9935ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  10215ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  10255ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  10535ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  10575ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  10855ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  10895ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  11175ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  11215ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  11495ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  11535ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  11815ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  11855ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  12135ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  12175ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  12455ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  12495ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  12775ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  12815ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  13095ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  13135ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  13415ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  13455ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  13735ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  13775ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  14055ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  14095ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  14375ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  14415ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  14695ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  14735ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  15015ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  15055ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  15335ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  15375ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  15655ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  15695ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  15975ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  16015ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  16295ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  16335ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  16615ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  16655ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  16935ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  16975ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  17255ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  17295ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  17575ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                CA_EPOCH <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  17615ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  17895ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  17935ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  18215ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  18255ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  18535ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  18575ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  18855ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  18895ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  19175ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  19215ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  19495ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  19535ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                -- -------------  Current Time:  19815ns
+                WAIT FOR 280 ns;
+                CA_CLOCK <= '1';
+                -- -------------------------------------
+                -- -------------  Current Time:  19855ns
+                WAIT FOR 40 ns;
+                CA_CLOCK <= '0';
+                -- -------------------------------------
+                WAIT FOR 185 ns;
+
+                STD.TEXTIO.write(TX_OUT, string'("Total[]"));
+                STD.TEXTIO.writeline(RESULTS, TX_OUT);
+                ASSERT (FALSE) REPORT
+                    "Success! Simulation for annotation completed"
+                    SEVERITY FAILURE;
+            END PROCESS;
+
+    END testbench_arch;
+

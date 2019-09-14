@@ -1,0 +1,30 @@
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+xst -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -ifn GGtoplevel.xst -ofn GGtoplevel.syr
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+xst -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -ifn GGtoplevel.xst -ofn GGtoplevel.syr
+ngdbuild -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -dd _ngo -i -p xa9500xl "GGtoplevel.ngc" GGtoplevel.ngd
+cpldfit -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -p xa95*xl-*-* -ofmt vhdl -htmlrpt -loc on -slew fast -init low -inputs 54 -pterms 25 -terminate keeper GGtoplevel.ngd
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+xst -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -ifn GGtoplevel.xst -ofn GGtoplevel.syr
+ngdbuild -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -dd _ngo -i -p xa9500xl "GGtoplevel.ngc" GGtoplevel.ngd
+cpldfit -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -p xa95*xl-*-* -ofmt vhdl -htmlrpt -loc on -slew fast -init low -inputs 54 -pterms 25 -terminate keeper GGtoplevel.ngd
+XSLTProcess -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" GGtoplevel_build.xml
+tsim -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise GGtoplevel GGtoplevel.nga
+taengine -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -f GGtoplevel -w --format html1 -l C:/peiqing/XilinxProjectPQ/GG/GGtoplevel_html/tim/timing_report.htm
+hprep6 -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -s IEEE1149 -i GGtoplevel
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+xst -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -ifn GGtoplevel.xst -ofn GGtoplevel.syr
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf
+xst -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -ifn GGtoplevel.xst -ofn GGtoplevel.syr
+ngdbuild -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -dd _ngo -i -p xa9500xl "GGtoplevel.ngc" GGtoplevel.ngd
+cpldfit -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -p xa95*xl-*-* -ofmt vhdl -htmlrpt -loc on -slew fast -init low -inputs 54 -pterms 25 -terminate keeper GGtoplevel.ngd
+XSLTProcess -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" GGtoplevel_build.xml
+tsim -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise GGtoplevel GGtoplevel.nga
+taengine -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -intstyle ise -f GGtoplevel -w --format html1 -l C:/peiqing/XilinxProjectPQ/GG/GGtoplevel_html/tim/timing_report.htm
+hprep6 -ise "C:/peiqing/XilinxProjectPQ/GG/GG.ise" -s IEEE1149 -i GGtoplevel
+sch2vhdl -intstyle ise -family xa9500xl -flat -suppress -w "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.sch" GGtoplevel.vhf

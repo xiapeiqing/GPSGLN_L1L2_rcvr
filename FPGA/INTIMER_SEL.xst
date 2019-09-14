@@ -1,0 +1,4 @@
+set -tmpdir "./xst/projnav.tmp"
+elaborate
+-ifn INTIMER_SEL.prj
+-ifmt mixed

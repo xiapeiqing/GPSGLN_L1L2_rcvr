@@ -1,0 +1,9 @@
+[Inputs]
+ARM
+CLOCK
+EPOCH
+MEASURE
+REF_CLOCK_1MS
+[Outputs]
+=COUNTER[9:0]=
+[BiDir]

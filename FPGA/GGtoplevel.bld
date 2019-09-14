@@ -1,0 +1,29 @@
+Release 9.1i ngdbuild J.30
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+
+Command Line: C:\Xilinx91i\bin\nt\ngdbuild.exe -ise
+C:/peiqing/XilinxProjectPQ/GG/GG.ise -intstyle ise -dd _ngo -i -p xa9500xl
+GGtoplevel.ngc GGtoplevel.ngd
+
+Reading NGO file "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.ngc" ...
+
+Checking timing specifications ...
+Checking Partitions ...
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   0
+
+Total memory usage is 65692 kilobytes
+
+Writing NGD file "GGtoplevel.ngd" ...
+
+Writing NGDBUILD log file "GGtoplevel.bld"...

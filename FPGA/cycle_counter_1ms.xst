@@ -1,0 +1,4 @@
+set -tmpdir "./xst/projnav.tmp"
+elaborate
+-ifn cycle_counter_1ms.prj
+-ifmt mixed

@@ -1,0 +1,65 @@
+NDS Database:  version J.30
+
+NDS_INFO | xa9500xl | A9536XL44VQ | XA9536XL-15-VQ44
+
+DEVICE | A9536XL | A9536XL44VQ | 
+
+NETWORK | GGtoplevel | 0 | 0 | 16859143
+
+MACROCELL_INSTANCE | LowPow+FbkInv+Merge+OptxMapped | Iout_L1_0_OBUF | GGtoplevel_COPY_0_COPY_0 | 2155907073 | 0 | 1
+OUTPUT_NODE_TYPE | 0 | 0 | MC_Q
+NODE | Iout_L1_0_OBUF$Q | 30 | ? | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | Iout_L1_0_OBUF.Q | Iout_L1_0_OBUF | 0 | 0 | MC_Q
+
+SIGNAL_INSTANCE | Iout_L1_0_OBUF.SI | Iout_L1_0_OBUF | 0 | 0 | 2
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | Iout_L1_0_OBUF.D1 | 35 | ? | 0 | 4096 | Iout_L1_0_OBUF | NULL | NULL | Iout_L1_0_OBUF.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | Iout_L1_0_OBUF.D2 | 36 | ? | 0 | 4096 | Iout_L1_0_OBUF | NULL | NULL | Iout_L1_0_OBUF.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 0 | IV_ZERO
+
+SRFF_INSTANCE | Iout_L1_0_OBUF.REG | Iout_L1_0_OBUF | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | Iout_L1_0_OBUF.D | 34 | ? | 0 | 0 | Iout_L1_0_OBUF | NULL | NULL | Iout_L1_0_OBUF.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | Iout_L1_0_OBUF.Q | 37 | ? | 0 | 0 | Iout_L1_0_OBUF | NULL | NULL | Iout_L1_0_OBUF.REG | 0 | 8 | SRFF_Q
+
+MACROCELL_INSTANCE | LowPow+OptxMapped | Iout_L1_0_OBUF$BUF0 | GGtoplevel_COPY_0_COPY_0 | 2155872257 | 0 | 1
+OUTPUT_NODE_TYPE | 0 | 0 | MC_Q
+NODE | Iout_L1_0_OBUF$BUF0 | 31 | ? | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | Iout_L1_0_OBUF$BUF0.Q | Iout_L1_0_OBUF$BUF0 | 0 | 0 | MC_Q
+
+SIGNAL_INSTANCE | Iout_L1_0_OBUF$BUF0.SI | Iout_L1_0_OBUF$BUF0 | 0 | 0 | 2
+OUTPUT_NODE_TYPE | 1 | 9 | MC_SI_D1
+SIGNAL | NODE | Iout_L1_0_OBUF$BUF0.D1 | 39 | ? | 0 | 4096 | Iout_L1_0_OBUF$BUF0 | NULL | NULL | Iout_L1_0_OBUF$BUF0.SI | 1 | 9 | MC_SI_D1
+SPPTERM | 0 | IV_ZERO
+OUTPUT_NODE_TYPE | 2 | 9 | MC_SI_D2
+SIGNAL | NODE | Iout_L1_0_OBUF$BUF0.D2 | 40 | ? | 0 | 6144 | Iout_L1_0_OBUF$BUF0 | NULL | NULL | Iout_L1_0_OBUF$BUF0.SI | 2 | 9 | MC_SI_D2
+SPPTERM | 0 | IV_ZERO
+
+SRFF_INSTANCE | Iout_L1_0_OBUF$BUF0.REG | Iout_L1_0_OBUF$BUF0 | 0 | 1 | 1
+INPUT_NODE_TYPE | 0 | 8 | SRFF_D
+NODE | Iout_L1_0_OBUF$BUF0.D | 38 | ? | 0 | 0 | Iout_L1_0_OBUF$BUF0 | NULL | NULL | Iout_L1_0_OBUF$BUF0.XOR | 0 | 7 | ALU_F
+OUTPUT_NODE_TYPE | 0 | 8 | SRFF_Q
+NODE | Iout_L1_0_OBUF$BUF0.Q | 41 | ? | 0 | 0 | Iout_L1_0_OBUF$BUF0 | NULL | NULL | Iout_L1_0_OBUF$BUF0.REG | 0 | 8 | SRFF_Q
+
+OUTPUT_INSTANCE | 0 | Iout_L1<1> | GGtoplevel_COPY_0_COPY_0 | 7 | 1 | 1
+INPUT_NODE_TYPE | 0 | 6 | OI_IN
+NODE | Iout_L1_0_OBUF$Q | 30 | ? | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | Iout_L1_0_OBUF.Q | Iout_L1_0_OBUF | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 0 | 6 | OI_OUT
+NODE | Iout_L1<1> | 32 | PO | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | NULL | Iout_L1<1> | 0 | 6 | OI_OUT
+
+OUTPUT_INSTANCE | 0 | Iout_L1<0> | GGtoplevel_COPY_0_COPY_0 | 7 | 1 | 1
+INPUT_NODE_TYPE | 0 | 6 | OI_IN
+NODE | Iout_L1_0_OBUF$BUF0 | 31 | ? | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | Iout_L1_0_OBUF$BUF0.Q | Iout_L1_0_OBUF$BUF0 | 0 | 0 | MC_Q
+OUTPUT_NODE_TYPE | 0 | 6 | OI_OUT
+NODE | Iout_L1<0> | 33 | PO | 0 | 0 | GGtoplevel_COPY_0_COPY_0 | NULL | NULL | Iout_L1<0> | 0 | 6 | OI_OUT
+
+FB_INSTANCE | FOOBAR1_ | GGtoplevel_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 2 | Iout_L1_0_OBUF$BUF0 | 1 | NULL | 0 | Iout_L1<0> | 1 | 41 | 49152
+
+FB_INSTANCE | FOOBAR2_ | GGtoplevel_COPY_0_COPY_0 | 0 | 0 | 0
+FBPIN | 2 | Iout_L1_0_OBUF | 1 | NULL | 0 | Iout_L1<1> | 1 | 38 | 49152
+
+FB_INSTANCE | INPUTPINS_FOOBAR3_ | GGtoplevel_COPY_0_COPY_0 | 0 | 0 | 0
+
+BUSINFO | IOUT_L1<1:0> | 2 | 0 | 1 | Iout_L1<0> | 1 | Iout_L1<1> | 0

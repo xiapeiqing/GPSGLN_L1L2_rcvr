@@ -1,0 +1,8 @@
+[Inputs]
+CLOCK1_023
+DAV
+=DATA_BUS[10:0]=
+[Outputs]
+CA_CODE
+CA_EPOCH
+[BiDir]

@@ -1,0 +1,407 @@
+--------------------------------------------------------------------------------
+-- Copyright (c) 1995-2003 Xilinx, Inc.
+-- All Right Reserved.
+--------------------------------------------------------------------------------
+--   ____  ____ 
+--  /   /\/   / 
+-- /___/  \  /    Vendor: Xilinx 
+-- \   \   \/     Version : 9.1i
+--  \   \         Application : ISE
+--  /   /         Filename : input_selector_tbw_selfcheck.ant
+-- /___/   /\     Timestamp : Sat Apr 07 15:28:11 2007
+-- \   \  /  \ 
+--  \___\/\___\ 
+--
+--Command: 
+--Design Name: input_selector_tbw_selfcheck
+--Device: Xilinx
+--
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+USE IEEE.STD_LOGIC_TEXTIO.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE STD.TEXTIO.ALL;
+
+ENTITY input_selector_tbw_selfcheck IS
+END input_selector_tbw_selfcheck;
+
+ARCHITECTURE testbench_arch OF input_selector_tbw_selfcheck IS
+    FILE RESULTS: TEXT OPEN WRITE_MODE IS "C:\peiqing\XilinxProjectPQ\GG\input_selector_tbw_selfcheck.ano";
+
+    COMPONENT INPUT_SELECTOR
+        PORT (
+            CLOCK : In std_logic;
+            I0 : In std_logic_vector (1 DownTo 0);
+            I1 : In std_logic_vector (1 DownTo 0);
+            I2 : In std_logic_vector (1 DownTo 0);
+            I3 : In std_logic_vector (1 DownTo 0);
+            I4 : In std_logic_vector (1 DownTo 0);
+            I5 : In std_logic_vector (1 DownTo 0);
+            I6 : In std_logic_vector (1 DownTo 0);
+            I7 : In std_logic_vector (1 DownTo 0);
+            INVQ_L1 : In std_logic;
+            INVQ_L2 : In std_logic;
+            INVI_L2 : In std_logic;
+            Q0 : In std_logic_vector (1 DownTo 0);
+            Q1 : In std_logic_vector (1 DownTo 0);
+            Q2 : In std_logic_vector (1 DownTo 0);
+            Q3 : In std_logic_vector (1 DownTo 0);
+            Q4 : In std_logic_vector (1 DownTo 0);
+            Q5 : In std_logic_vector (1 DownTo 0);
+            Q6 : In std_logic_vector (1 DownTo 0);
+            Q7 : In std_logic_vector (1 DownTo 0);
+            SEL0_3 : In std_logic_vector (1 DownTo 0);
+            SEL4_7 : In std_logic_vector (1 DownTo 0);
+            SEL4_7NOT0_3 : In std_logic;
+            IOUT_L1 : Out std_logic_vector (1 DownTo 0);
+            IOUT_L2 : Out std_logic_vector (1 DownTo 0);
+            QOUT_L1 : Out std_logic_vector (1 DownTo 0);
+            QOUT_L2 : Out std_logic_vector (1 DownTo 0)
+        );
+    END COMPONENT;
+
+    SIGNAL CLOCK : std_logic := '0';
+    SIGNAL I0 : std_logic_vector (1 DownTo 0) := "01";
+    SIGNAL I1 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I2 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I3 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I4 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I5 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I6 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL I7 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL INVQ_L1 : std_logic := '0';
+    SIGNAL INVQ_L2 : std_logic := '0';
+    SIGNAL INVI_L2 : std_logic := '0';
+    SIGNAL Q0 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q1 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q2 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q3 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q4 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q5 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q6 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL Q7 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL SEL0_3 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL SEL4_7 : std_logic_vector (1 DownTo 0) := "00";
+    SIGNAL SEL4_7NOT0_3 : std_logic := '0';
+    SIGNAL IOUT_L1 : std_logic_vector (1 DownTo 0) := "UU";
+    SIGNAL IOUT_L2 : std_logic_vector (1 DownTo 0) := "UU";
+    SIGNAL QOUT_L1 : std_logic_vector (1 DownTo 0) := "UU";
+    SIGNAL QOUT_L2 : std_logic_vector (1 DownTo 0) := "UU";
+
+    SHARED VARIABLE TX_ERROR : INTEGER := 0;
+    SHARED VARIABLE TX_OUT : LINE;
+
+    constant PERIOD : time := 200 ns;
+    constant DUTY_CYCLE : real := 0.5;
+    constant OFFSET : time := 0 ns;
+
+    BEGIN
+        UUT : INPUT_SELECTOR
+        PORT MAP (
+            CLOCK => CLOCK,
+            I0 => I0,
+            I1 => I1,
+            I2 => I2,
+            I3 => I3,
+            I4 => I4,
+            I5 => I5,
+            I6 => I6,
+            I7 => I7,
+            INVQ_L1 => INVQ_L1,
+            INVQ_L2 => INVQ_L2,
+            INVI_L2 => INVI_L2,
+            Q0 => Q0,
+            Q1 => Q1,
+            Q2 => Q2,
+            Q3 => Q3,
+            Q4 => Q4,
+            Q5 => Q5,
+            Q6 => Q6,
+            Q7 => Q7,
+            SEL0_3 => SEL0_3,
+            SEL4_7 => SEL4_7,
+            SEL4_7NOT0_3 => SEL4_7NOT0_3,
+            IOUT_L1 => IOUT_L1,
+            IOUT_L2 => IOUT_L2,
+            QOUT_L1 => QOUT_L1,
+            QOUT_L2 => QOUT_L2
+        );
+
+        PROCESS    -- clock process for CLOCK
+        BEGIN
+            WAIT for OFFSET;
+            CLOCK_LOOP : LOOP
+                CLOCK <= '0';
+                WAIT FOR (PERIOD - (PERIOD * DUTY_CYCLE));
+                CLOCK <= '1';
+                WAIT FOR (PERIOD * DUTY_CYCLE);
+            END LOOP CLOCK_LOOP;
+        END PROCESS;
+
+        PROCESS    -- Annotation process for CLOCK
+            VARIABLE TX_TIME : INTEGER := 0;
+
+            PROCEDURE ANNOTATE_IOUT_L1(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", IOUT_L1, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, IOUT_L1);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+            PROCEDURE ANNOTATE_IOUT_L2(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", IOUT_L2, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, IOUT_L2);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+            PROCEDURE ANNOTATE_QOUT_L1(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", QOUT_L1, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, QOUT_L1);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+            PROCEDURE ANNOTATE_QOUT_L2(
+                TX_TIME : INTEGER
+            ) IS
+                VARIABLE TX_STR : String(1 to 4096);
+                VARIABLE TX_LOC : LINE;
+            BEGIN
+                STD.TEXTIO.write(TX_LOC, string'("Annotate["));
+                STD.TEXTIO.write(TX_LOC, TX_TIME);
+                STD.TEXTIO.write(TX_LOC, string'(", QOUT_L2, "));
+                IEEE.STD_LOGIC_TEXTIO.write(TX_LOC, QOUT_L2);
+                STD.TEXTIO.write(TX_LOC, string'("]"));
+                TX_STR(TX_LOC.all'range) := TX_LOC.all;
+                STD.TEXTIO.writeline(RESULTS, TX_LOC);
+                STD.TEXTIO.Deallocate(TX_LOC);
+            END;
+        BEGIN
+            WAIT for 1 fs;
+            ANNOTATE_IOUT_L1(0);
+            ANNOTATE_IOUT_L2(0);
+            ANNOTATE_QOUT_L1(0);
+            ANNOTATE_QOUT_L2(0);
+            WAIT for OFFSET;
+            TX_TIME := TX_TIME + 0;
+            ANNO_LOOP : LOOP
+                --Rising Edge
+                WAIT for 115 ns;
+                TX_TIME := TX_TIME + 115;
+                ANNOTATE_IOUT_L1(TX_TIME);
+                ANNOTATE_IOUT_L2(TX_TIME);
+                ANNOTATE_QOUT_L1(TX_TIME);
+                ANNOTATE_QOUT_L2(TX_TIME);
+                WAIT for 85 ns;
+                TX_TIME := TX_TIME + 85;
+            END LOOP ANNO_LOOP;
+        END PROCESS;
+
+        PROCESS
+            BEGIN
+                -- -------------  Current Time:  85ns
+                WAIT FOR 85 ns;
+                I0 <= "11";
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                -- -------------------------------------
+                -- -------------  Current Time:  285ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                I1 <= "11";
+                I2 <= "11";
+                I3 <= "11";
+                -- -------------------------------------
+                -- -------------  Current Time:  485ns
+                WAIT FOR 200 ns;
+                I0 <= "00";
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  685ns
+                WAIT FOR 200 ns;
+                I0 <= "11";
+                I1 <= "00";
+                I2 <= "00";
+                I3 <= "00";
+                -- -------------------------------------
+                -- -------------  Current Time:  885ns
+                WAIT FOR 200 ns;
+                I0 <= "01";
+                I1 <= "11";
+                I2 <= "11";
+                I3 <= "11";
+                -- -------------------------------------
+                -- -------------  Current Time:  1085ns
+                WAIT FOR 200 ns;
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                -- -------------------------------------
+                -- -------------  Current Time:  1285ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  1485ns
+                WAIT FOR 200 ns;
+                I0 <= "00";
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  1685ns
+                WAIT FOR 200 ns;
+                I0 <= "01";
+                I1 <= "00";
+                I2 <= "00";
+                I3 <= "00";
+                -- -------------------------------------
+                -- -------------  Current Time:  1885ns
+                WAIT FOR 200 ns;
+                I0 <= "11";
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                -- -------------------------------------
+                -- -------------  Current Time:  2085ns
+                WAIT FOR 200 ns;
+                I0 <= "00";
+                I1 <= "11";
+                I2 <= "11";
+                I3 <= "11";
+                -- -------------------------------------
+                -- -------------  Current Time:  2285ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                I1 <= "00";
+                I2 <= "00";
+                I3 <= "00";
+                -- -------------------------------------
+                -- -------------  Current Time:  2485ns
+                WAIT FOR 200 ns;
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  2685ns
+                WAIT FOR 200 ns;
+                I0 <= "01";
+                I4 <= "01";
+                -- -------------------------------------
+                -- -------------  Current Time:  2885ns
+                WAIT FOR 200 ns;
+                I0 <= "11";
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                I4 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  3085ns
+                WAIT FOR 200 ns;
+                I0 <= "00";
+                I1 <= "11";
+                I2 <= "11";
+                I3 <= "11";
+                I4 <= "11";
+                -- -------------------------------------
+                -- -------------  Current Time:  3285ns
+                WAIT FOR 200 ns;
+                I1 <= "00";
+                I2 <= "00";
+                I3 <= "00";
+                -- -------------------------------------
+                -- -------------  Current Time:  3485ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  3685ns
+                WAIT FOR 200 ns;
+                I0 <= "01";
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                I5 <= "01";
+                -- -------------------------------------
+                -- -------------  Current Time:  3885ns
+                WAIT FOR 200 ns;
+                I0 <= "11";
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                I5 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  4085ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                I1 <= "11";
+                I2 <= "11";
+                I3 <= "11";
+                I5 <= "11";
+                -- -------------------------------------
+                -- -------------  Current Time:  4285ns
+                WAIT FOR 200 ns;
+                I0 <= "00";
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  4485ns
+                WAIT FOR 200 ns;
+                I0 <= "10";
+                I1 <= "00";
+                I2 <= "00";
+                I3 <= "00";
+                -- -------------------------------------
+                -- -------------  Current Time:  4685ns
+                WAIT FOR 200 ns;
+                I0 <= "01";
+                I1 <= "10";
+                I2 <= "10";
+                I3 <= "10";
+                -- -------------------------------------
+                -- -------------  Current Time:  4885ns
+                WAIT FOR 200 ns;
+                I1 <= "01";
+                I2 <= "01";
+                I3 <= "01";
+                -- -------------------------------------
+                WAIT FOR 1315 ns;
+
+                STD.TEXTIO.write(TX_OUT, string'("Total[]"));
+                STD.TEXTIO.writeline(RESULTS, TX_OUT);
+                ASSERT (FALSE) REPORT
+                    "Success! Simulation for annotation completed"
+                    SEVERITY FAILURE;
+            END PROCESS;
+
+    END testbench_arch;
+

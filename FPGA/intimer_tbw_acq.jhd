@@ -1,0 +1,3 @@
+MODULE intimer_tbw_acq
+SUBMODULE intimer
+INSTANCE UUT

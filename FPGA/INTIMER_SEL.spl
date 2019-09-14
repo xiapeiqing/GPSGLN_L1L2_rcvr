@@ -1,0 +1,9 @@
+[Inputs]
+DUAL_CA
+EPOCH_1
+INT2
+INTENDS2
+[Outputs]
+EPOCH_2
+INTERRUPT2
+[BiDir]

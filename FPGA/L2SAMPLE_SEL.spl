@@ -1,0 +1,10 @@
+[Inputs]
+L1_ON_L2
+=SAMPLES_I_IRM2[1:0]=
+=SAMPLES_L1I[1:0]=
+=SAMPLES_L1Q[1:0]=
+=SAMPLES_Q_IRM2[1:0]=
+[Outputs]
+=SAMPLES_L2I[1:0]=
+=SAMPLES_L2Q[1:0]=
+[BiDir]

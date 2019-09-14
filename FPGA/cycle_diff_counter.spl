@@ -1,0 +1,11 @@
+[Inputs]
+CLOCK
+DAV
+MEASURE
+P1CLK
+P2CLK
+=DIN[5:0]=
+[Outputs]
+=DIFF[5:0]=
+=DIFF_BUF[5:0]=
+[BiDir]

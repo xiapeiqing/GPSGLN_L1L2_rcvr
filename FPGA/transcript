@@ -1,0 +1,56 @@
+# do {ca_code_nco_tbw.ado} 
+# ** Warning: (vlib-34) Library already exists at "work".
+# resume
+# Model Technology ModelSim PE Student Edition vcom 6.2g Compiler 2007.02 Feb 21 2007
+# -- Loading package standard
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package std_logic_unsigned
+# -- Compiling entity ca_code_nco
+# -- Compiling architecture behaviour of ca_code_nco
+# -- Compiling configuration cfg_code_nco
+# -- Loading entity ca_code_nco
+# -- Loading architecture behaviour of ca_code_nco
+# Model Technology ModelSim PE Student Edition vcom 6.2g Compiler 2007.02 Feb 21 2007
+# -- Loading package standard
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package std_logic_unsigned
+# -- Loading package textio
+# -- Loading package std_logic_textio
+# -- Compiling entity ca_code_nco_tbw
+# -- Compiling architecture testbench_arch of ca_code_nco_tbw
+# //  ModelSim PE Student Edition 6.2g Feb 21 2007 
+# //
+# //  Copyright 1991-2007 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+# 
+# // NOT FOR CORPORATE OR PRODUCTION USE.
+# // THE ModelSim PE Student Edition IS NOT A SUPPORTED PRODUCT.
+# // FOR HIGHER EDUCATION PURPOSES ONLY
+# //
+# vsim -lib work -t 1ps ca_code_nco_tbw 
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../std.standard
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../ieee.std_logic_1164(body)
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../ieee.std_logic_arith(body)
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../ieee.std_logic_unsigned(body)
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../std.textio(body)
+# Loading C:\Modeltech_pe_edu_6.2g\win32pe_edu/../ieee.std_logic_textio(body)
+# Loading work.ca_code_nco_tbw(testbench_arch)
+# ** Warning: (vsim-3479) Time unit 'fs' is less than the simulator resolution (1ps).
+#    Time: 0 ps  Iteration: 0  Region: /
+# Loading work.ca_code_nco(behaviour)
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5 ns  Iteration: 1  Instance: /ca_code_nco_tbw/uut
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5 ns  Iteration: 1  Instance: /ca_code_nco_tbw/uut
+# ** Failure: Success! Simulation for annotation completed
+#    Time: 20010 ns  Iteration: 0  Process: /ca_code_nco_tbw/line__200 File: ca_code_nco_tbw.ant
+# Break in Process line__200 at ca_code_nco_tbw.ant line 227
+# Stopped at ca_code_nco_tbw.ant line 227 

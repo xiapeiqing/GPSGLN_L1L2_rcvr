@@ -1,0 +1,14 @@
+Model,MSO4034
+Firmware Version,2.1
+
+Point Format,Y,,,,
+Horizontal Units,S,,,,
+Horizontal Scale,0.004,,,,
+Sample Interval,4e-09,,,,
+Record Length,1e+07,,,,
+,,,,,
+Vertical Units,V,V,V,V,V
+Threshold used,1.4,1.4,1.4,1.4,1.22
+,,,,,
+Label,,,,,
+TIME,D4,D3,D2,D1,D0

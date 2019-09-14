@@ -1,0 +1,10 @@
+[Inputs]
+GPS_notGLONASS
+DAV
+NCO_clock
+=X2A_din[11:0]=
+=X2B_din[11:0]=
+[Outputs]
+X1_epoch
+P_code
+[BiDir]

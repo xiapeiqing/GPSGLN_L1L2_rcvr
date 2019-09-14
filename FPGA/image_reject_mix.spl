@@ -1,0 +1,9 @@
+[Inputs]
+CLOCK
+=IIN[1:0]=
+=PHASE_IN[3:0]=
+=QIN[1:0]=
+[Outputs]
+=IOUT[1:0]=
+=QOUT[1:0]=
+[BiDir]

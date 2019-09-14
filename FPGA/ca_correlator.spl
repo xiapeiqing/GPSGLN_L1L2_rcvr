@@ -1,0 +1,11 @@
+[Inputs]
+CLOCK
+CODE
+ENABLE_ACC
+EPOCH
+=IIN[1:0]=
+=QIN[1:0]=
+[Outputs]
+=IOUT[22:0]=
+=QOUT[22:0]=
+[BiDir]

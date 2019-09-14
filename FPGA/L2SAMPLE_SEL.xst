@@ -1,0 +1,4 @@
+set -tmpdir "./xst/projnav.tmp"
+elaborate
+-ifn L2SAMPLE_SEL.prj
+-ifmt mixed

@@ -1,0 +1,255 @@
+Release 9.1i - xst J.30
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to ./xst/projnav.tmp
+CPU : 0.00 / 0.27 s | Elapsed : 0.00 / 0.00 s
+ 
+--> Parameter xsthdpdir set to ./xst
+CPU : 0.00 / 0.27 s | Elapsed : 0.00 / 0.00 s
+ 
+--> Reading design: GGtoplevel.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "GGtoplevel.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "GGtoplevel"
+Output Format                      : NGC
+Target Device                      : Automotive 9500XL
+
+---- Source Options
+Top Module Name                    : GGtoplevel
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+Mux Extraction                     : YES
+Resource Sharing                   : YES
+
+---- Target Options
+Add IO Buffers                     : YES
+MACRO Preserve                     : YES
+XOR Preserve                       : YES
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Library Search Order               : GGtoplevel.lso
+Keep Hierarchy                     : YES
+RTL Output                         : Yes
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Verilog 2001                       : YES
+
+---- Other Options
+Clock Enable                       : YES
+wysiwyg                            : NO
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/peiqing/XilinxProjectPQ/GG/VHDLsource/input_selector.vhd" in Library work.
+Architecture behavioural of Entity input_selector is up to date.
+Compiling vhdl file "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.vhf" in Library work.
+Entity <ggtoplevel> compiled.
+Entity <ggtoplevel> (Architecture <behavioral>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <GGtoplevel> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <INPUT_SELECTOR> in library <work> (architecture <behavioural>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <GGtoplevel> in library <work> (Architecture <behavioral>).
+WARNING:Xst:753 - "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.vhf" line 87: Unconnected output port 'IOUT_L2' of component 'INPUT_SELECTOR'.
+WARNING:Xst:753 - "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.vhf" line 87: Unconnected output port 'QOUT_L1' of component 'INPUT_SELECTOR'.
+WARNING:Xst:753 - "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.vhf" line 87: Unconnected output port 'QOUT_L2' of component 'INPUT_SELECTOR'.
+Entity <GGtoplevel> analyzed. Unit <GGtoplevel> generated.
+
+Analyzing Entity <INPUT_SELECTOR> in library <work> (Architecture <behavioural>).
+Entity <INPUT_SELECTOR> analyzed. Unit <INPUT_SELECTOR> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <INPUT_SELECTOR>.
+    Related source file is "C:/peiqing/XilinxProjectPQ/GG/VHDLsource/input_selector.vhd".
+    Found 2-bit register for signal <IOUT_L1>.
+    Found 2-bit register for signal <IOUT_L2>.
+    Found 2-bit register for signal <QOUT_L1>.
+    Found 2-bit register for signal <QOUT_L2>.
+    Found 2-bit 4-to-1 multiplexer for signal <IOUT_L1_var$mux0000> created at line 119.
+    Found 1-bit xor2 for signal <IOUT_L2_0$xor0000> created at line 150.
+    Found 1-bit xor2 for signal <IOUT_L2_0$xor0001> created at line 155.
+    Found 1-bit xor2 for signal <IOUT_L2_1$xor0000> created at line 151.
+    Found 1-bit xor2 for signal <IOUT_L2_1$xor0001> created at line 156.
+    Found 2-bit 4-to-1 multiplexer for signal <IOUT_L2_var$mux0000> created at line 134.
+    Found 1-bit xor2 for signal <QOUT_L1_0$xor0000> created at line 162.
+    Found 1-bit xor2 for signal <QOUT_L1_1$xor0000> created at line 163.
+    Found 2-bit 4-to-1 multiplexer for signal <QOUT_L1_var$mux0000> created at line 119.
+    Found 1-bit xor2 for signal <QOUT_L2_0$xor0000> created at line 152.
+    Found 1-bit xor2 for signal <QOUT_L2_0$xor0001> created at line 157.
+    Found 1-bit xor2 for signal <QOUT_L2_1$xor0000> created at line 153.
+    Found 1-bit xor2 for signal <QOUT_L2_1$xor0001> created at line 158.
+    Found 2-bit 4-to-1 multiplexer for signal <QOUT_L2_var$mux0000> created at line 134.
+    Summary:
+	inferred   6 D-type flip-flop(s).
+	inferred  10 Xor(s).
+Unit <INPUT_SELECTOR> synthesized.
+
+
+Synthesizing Unit <GGtoplevel>.
+    Related source file is "C:/peiqing/XilinxProjectPQ/GG/GGtoplevel.vhf".
+WARNING:Xst:653 - Signal <XLXI_1_I7_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I5_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I3_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q6_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I1_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_SEL4_7_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q4_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_SEL0_3_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_INVQ_L2_openSignal> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <XLXI_1_Q2_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q0_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_SEL4_7NOT0_3_openSignal> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <XLXI_1_I6_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I4_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q7_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I2_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_INVI_L2_openSignal> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <XLXI_1_Q5_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_I0_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q3_openSignal> is used but never assigned. Tied to value 00.
+WARNING:Xst:653 - Signal <XLXI_1_Q1_openSignal> is used but never assigned. Tied to value 00.
+Unit <GGtoplevel> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 7
+ 1-bit register                                        : 6
+ 2-bit register                                        : 1
+# Multiplexers                                         : 4
+ 2-bit 4-to-1 multiplexer                              : 4
+# Xors                                                 : 10
+ 1-bit xor2                                            : 10
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+WARNING:Xst:1710 - FF/Latch  <1> (without init value) has a constant value of 0 in block <IOUT_L1>.
+WARNING:Xst:1710 - FF/Latch  <0> (without init value) has a constant value of 0 in block <IOUT_L1>.
+WARNING:Xst:2677 - Node <IOUT_L2_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <IOUT_L2_0> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L1_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L1_0> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L2_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L2_0> of sequential type is unconnected in block <XLXI_1>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 8
+ Flip-Flops                                            : 8
+# Multiplexers                                         : 4
+ 2-bit 4-to-1 multiplexer                              : 4
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <GGtoplevel> ...
+
+Optimizing unit <INPUT_SELECTOR> ...
+WARNING:Xst:1710 - FF/Latch  <IOUT_L1_0> (without init value) has a constant value of 0 in block <XLXI_1>.
+WARNING:Xst:1710 - FF/Latch  <IOUT_L1_1> (without init value) has a constant value of 0 in block <XLXI_1>.
+WARNING:Xst:2677 - Node <IOUT_L2_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <IOUT_L2_0> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L1_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L1_0> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L2_1> of sequential type is unconnected in block <XLXI_1>.
+WARNING:Xst:2677 - Node <QOUT_L2_0> of sequential type is unconnected in block <XLXI_1>.
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : GGtoplevel.ngr
+Top Level Output File Name         : GGtoplevel
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : YES
+Target Technology                  : Automotive 9500XL
+Macro Preserve                     : YES
+XOR Preserve                       : YES
+Clock Enable                       : YES
+wysiwyg                            : NO
+
+Design Statistics
+# IOs                              : 4
+
+Cell Usage :
+# BELS                             : 1
+#      GND                         : 1
+# IO Buffers                       : 2
+#      OBUF                        : 2
+=========================================================================
+CPU : 3.95 / 4.25 s | Elapsed : 4.00 / 4.00 s
+ 
+--> 
+
+Total memory usage is 122240 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   40 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

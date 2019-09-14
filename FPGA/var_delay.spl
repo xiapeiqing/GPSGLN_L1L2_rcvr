@@ -1,0 +1,8 @@
+[Inputs]
+CLOCK
+PN_CODE
+=DELAY[5:0]=
+[Outputs]
+Q1_CODE
+Q2_CODE
+[BiDir]
